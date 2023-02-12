@@ -87,6 +87,7 @@ export default class HelloWorldScene extends Phaser.Scene {
       });
       this.physics.add.collider(this.player as Phaser.Types.Physics.Arcade.SpriteWithDynamicBody, goodDonut, (player, goodDonut) => {
         console.log(player);
+        console.log(player);
         goodDonut.destroy();
         this.donutCounter += 1;
         this.text2?.setText(this.donutCounter.toString());
