@@ -57,16 +57,17 @@ export default class HelloWorldScene extends Phaser.Scene {
 
     // this.physics.add.overlap(cody, donut);
     this.physics.add.collider(this.player, this.donut, (player, donut) => {
+      console.log(player);
       (donut as Phaser.Types.Physics.Arcade.ImageWithDynamicBody).setVelocityX(500);
       (donut as Phaser.Types.Physics.Arcade.ImageWithDynamicBody).setVelocityY(500);
     });
 
     emitter.startFollow(this.donut);
 
-    this.input.keyboard?.on('keydown', (event: KeyboardEvent) => {
+    this.input.keyboard?.on('keydown', () => {
       this.player?.play('walk');
     });
-    this.input.keyboard?.on('keyup', (event: KeyboardEvent) => {
+    this.input.keyboard?.on('keyup', () => {
       this.player?.stop();
       this.player?.setFrame('idle');
     });
@@ -79,11 +80,13 @@ export default class HelloWorldScene extends Phaser.Scene {
       const goodDonut = this.physics.add.sprite(Phaser.Math.Between(0, 1400), Phaser.Math.Between(0, 900), 'donuts', 'glazing_5.png');
       goodDonut.scale = 0.2;
       this.physics.add.collider(this.donut as Phaser.Types.Physics.Arcade.SpriteWithDynamicBody, goodDonut, (donut, goodDonut) => {
+        console.log(donut);
         goodDonut.destroy();
         this.donutCounter += 1;
         this.text2?.setText(this.donutCounter.toString());
       });
       this.physics.add.collider(this.player as Phaser.Types.Physics.Arcade.SpriteWithDynamicBody, goodDonut, (player, goodDonut) => {
+        console.log(player);
         goodDonut.destroy();
         this.donutCounter += 1;
         this.text2?.setText(this.donutCounter.toString());
@@ -92,12 +95,14 @@ export default class HelloWorldScene extends Phaser.Scene {
       const badDonut = this.physics.add.sprite(Phaser.Math.Between(0, 1400), Phaser.Math.Between(0, 900), 'donuts', 'glazing_3.png');
       badDonut.scale = 0.2;
       this.physics.add.collider(this.donut as Phaser.Types.Physics.Arcade.SpriteWithDynamicBody, badDonut, (donut, badDonut) => {
+        console.log(donut);
         badDonut.destroy();
         this.donutCounter -= 1;
         this.text2?.setText(this.donutCounter.toString());
       });
 
       this.physics.add.collider(this.player as Phaser.Types.Physics.Arcade.SpriteWithDynamicBody, badDonut, (donut, badDonut) => {
+        console.log(donut);
         badDonut.destroy();
         this.donutCounter -= 1;
         this.text2?.setText(this.donutCounter.toString());
