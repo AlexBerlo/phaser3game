@@ -9,7 +9,7 @@ export default class HelloWorldScene extends Phaser.Scene {
   text2: Phaser.GameObjects.Text | undefined;
 
   constructor() {
-    super();
+    super('hello-world');
   }
 
   preload() {
@@ -92,14 +92,14 @@ export default class HelloWorldScene extends Phaser.Scene {
         this.donutCounter += 1;
         this.text2?.setText(this.donutCounter.toString());
       });
+    }, 2000);
 
+    setInterval(() => {
       const badDonut = this.physics.add.sprite(Phaser.Math.Between(0, 1400), Phaser.Math.Between(0, 900), 'donuts', 'glazing_3.png');
       badDonut.scale = 0.2;
       this.physics.add.collider(this.donut as Phaser.Types.Physics.Arcade.SpriteWithDynamicBody, badDonut, (donut, badDonut) => {
         console.log(donut);
         badDonut.destroy();
-        this.donutCounter -= 1;
-        this.text2?.setText(this.donutCounter.toString());
       });
 
       this.physics.add.collider(this.player as Phaser.Types.Physics.Arcade.SpriteWithDynamicBody, badDonut, (donut, badDonut) => {
@@ -108,7 +108,7 @@ export default class HelloWorldScene extends Phaser.Scene {
         this.donutCounter -= 1;
         this.text2?.setText(this.donutCounter.toString());
       });
-    }, 2000);
+    }, 6000);
   }
 
   update() {
