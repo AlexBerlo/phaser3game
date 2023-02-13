@@ -33,12 +33,10 @@ export default class HelloWorldScene extends Phaser.Scene {
     });
 
     this.player = this.physics.add.sprite(600, 370, 'female', 'idle');
-    this.player.scaleX = 0.5;
-    this.player.scaleY = 0.5;
+    this.player.scale = 0.3;
 
     this.donut = this.physics.add.sprite(300, 200, 'donuts', 'donut_1.png');
-    this.donut.scaleX = 0.1;
-    this.donut.scaleY = 0.1;
+    this.donut.scale = 0.1;
 
     const particles = this.add.particles('donuts', 'glazing_1.png');
     const emitter = particles.createEmitter({
@@ -78,7 +76,7 @@ export default class HelloWorldScene extends Phaser.Scene {
   loadRandomDonuts() {
     setInterval(() => {
       const goodDonut = this.physics.add.sprite(Phaser.Math.Between(0, 1400), Phaser.Math.Between(0, 900), 'donuts', 'glazing_5.png');
-      goodDonut.scale = 0.2;
+      goodDonut.scale = 0.15;
       this.physics.add.collider(this.donut as Phaser.Types.Physics.Arcade.SpriteWithDynamicBody, goodDonut, (donut, goodDonut) => {
         console.log(donut);
         goodDonut.destroy();
@@ -96,7 +94,7 @@ export default class HelloWorldScene extends Phaser.Scene {
 
     setInterval(() => {
       const badDonut = this.physics.add.sprite(Phaser.Math.Between(0, 1400), Phaser.Math.Between(0, 900), 'donuts', 'glazing_3.png');
-      badDonut.scale = 0.2;
+      badDonut.scale = 0.15;
       this.physics.add.collider(this.donut as Phaser.Types.Physics.Arcade.SpriteWithDynamicBody, badDonut, (donut, badDonut) => {
         console.log(donut);
         badDonut.destroy();
