@@ -2,6 +2,7 @@ import Phaser from 'phaser';
 
 import HelloWorldScene from './HelloWorldScene';
 import MainMenuScene from './MainMenuScene';
+import PlatformerScene from './PlatformerScene';
 
 const config: Phaser.Types.Core.GameConfig = {
   type: Phaser.AUTO,
@@ -14,7 +15,8 @@ const config: Phaser.Types.Core.GameConfig = {
       gravity: { y: 0 },
     },
   },
-  scene: [MainMenuScene, HelloWorldScene],
+  scene: [MainMenuScene, HelloWorldScene, PlatformerScene],
+  // scene: [PlatformerScene],
 };
 
 export default new Phaser.Game(config);

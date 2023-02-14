@@ -13,7 +13,11 @@ export default class HelloWorldScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.atlasXML('female', '/assets/character_femalePerson_sheetHD.png', '/assets/character_femalePerson_sheetHD.xml');
+    this.load.atlasXML(
+      'female',
+      '/assets/character_femalePerson_sheetHD.png',
+      '/assets/character_femalePerson_sheetHD.xml'
+    );
     this.load.atlasXML('donuts', '/assets/donuts_sheet.png', '/assets/donuts_sheet.xml');
   }
 
@@ -22,7 +26,8 @@ export default class HelloWorldScene extends Phaser.Scene {
     text1.setTint(0xff00ff, 0xffff00, 0x0000ff, 0xff0000);
     this.text2 = this.add.text(20, 40, this.donutCounter.toString());
 
-    this.cursors = this.input.keyboard?.createCursorKeys() as Phaser.Types.Input.Keyboard.CursorKeys;
+    this.cursors =
+      this.input.keyboard?.createCursorKeys() as Phaser.Types.Input.Keyboard.CursorKeys;
     console.log(this.textures.get('female'));
 
     this.anims.create({
@@ -75,37 +80,69 @@ export default class HelloWorldScene extends Phaser.Scene {
 
   loadRandomDonuts() {
     setInterval(() => {
-      const goodDonut = this.physics.add.sprite(Phaser.Math.Between(0, 1400), Phaser.Math.Between(0, 900), 'donuts', 'glazing_5.png');
+      const goodDonut = this.physics.add.sprite(
+        Phaser.Math.Between(0, 1400),
+        Phaser.Math.Between(0, 900),
+        'donuts',
+        'glazing_5.png'
+      );
       goodDonut.scale = 0.15;
-      this.physics.add.collider(this.donut as Phaser.Types.Physics.Arcade.SpriteWithDynamicBody, goodDonut, (donut, goodDonut) => {
-        console.log(donut);
-        goodDonut.destroy();
-        this.donutCounter += 1;
-        this.text2?.setText(this.donutCounter.toString());
-      });
-      this.physics.add.collider(this.player as Phaser.Types.Physics.Arcade.SpriteWithDynamicBody, goodDonut, (player, goodDonut) => {
-        console.log(player);
-        console.log(player);
-        goodDonut.destroy();
-        this.donutCounter += 1;
-        this.text2?.setText(this.donutCounter.toString());
-      });
+      this.physics.add.collider(
+        this.donut as Phaser.Types.Physics.Arcade.SpriteWithDynamicBody,
+        goodDonut,
+        (donut, goodDonut) => {
+          console.log(donut);
+          goodDonut.destroy();
+          this.donutCounter += 1;
+          this.text2?.setText(this.donutCounter.toString());
+          if (this.donutCounter === 5) {
+            this.scene.start('platformer');
+          }
+        }
+      );
+      this.physics.add.collider(
+        this.player as Phaser.Types.Physics.Arcade.SpriteWithDynamicBody,
+        goodDonut,
+        (player, goodDonut) => {
+          console.log(player);
+          console.log(player);
+          goodDonut.destroy();
+          this.donutCounter += 1;
+          this.text2?.setText(this.donutCounter.toString());
+          if (this.donutCounter === 5) {
+            this.scene.start('platformer');
+          }
+        }
+      );
     }, 2000);
 
     setInterval(() => {
-      const badDonut = this.physics.add.sprite(Phaser.Math.Between(0, 1400), Phaser.Math.Between(0, 900), 'donuts', 'glazing_3.png');
+      const badDonut = this.physics.add.sprite(
+        Phaser.Math.Between(0, 1400),
+        Phaser.Math.Between(0, 900),
+        'donuts',
+        'glazing_3.png'
+      );
       badDonut.scale = 0.15;
-      this.physics.add.collider(this.donut as Phaser.Types.Physics.Arcade.SpriteWithDynamicBody, badDonut, (donut, badDonut) => {
-        console.log(donut);
-        badDonut.destroy();
-      });
+      this.physics.add.collider(
+        this.donut as Phaser.Types.Physics.Arcade.SpriteWithDynamicBody,
+        badDonut,
+        (donut, badDonut) => {
+          console.log(donut);
+          badDonut.destroy();
+        }
+      );
 
-      this.physics.add.collider(this.player as Phaser.Types.Physics.Arcade.SpriteWithDynamicBody, badDonut, (donut, badDonut) => {
-        console.log(donut);
-        badDonut.destroy();
-        this.donutCounter -= 1;
-        this.text2?.setText(this.donutCounter.toString());
-      });
+      this.physics.add.collider(
+        this.player as Phaser.Types.Physics.Arcade.SpriteWithDynamicBody,
+        badDonut,
+        (donut, badDonut) => {
+          console.log(donut);
+          badDonut.destroy();
+          this.donutCounter -= 1;
+          this.text2?.setText(this.donutCounter.toString());
+        }
+      );
     }, 6000);
   }
 
