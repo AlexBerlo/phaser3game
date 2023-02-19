@@ -7,6 +7,8 @@ export default class HelloWorldScene extends Phaser.Scene {
   cursors: Phaser.Types.Input.Keyboard.CursorKeys | undefined;
   donutCounter = 0;
   text2: Phaser.GameObjects.Text | undefined;
+  intervalHandler: number | undefined;
+  intervalHandlerBadDonuts: number | undefined;
 
   constructor() {
     super('hello-world');
@@ -60,7 +62,6 @@ export default class HelloWorldScene extends Phaser.Scene {
 
     // this.physics.add.overlap(cody, donut);
     this.physics.add.collider(this.player, this.donut, (player, donut) => {
-      console.log(player);
       (donut as Phaser.Types.Physics.Arcade.ImageWithDynamicBody).setVelocityX(500);
       (donut as Phaser.Types.Physics.Arcade.ImageWithDynamicBody).setVelocityY(500);
     });
@@ -79,7 +80,7 @@ export default class HelloWorldScene extends Phaser.Scene {
   }
 
   loadRandomDonuts() {
-    setInterval(() => {
+    this.intervalHandler = setInterval(() => {
       const goodDonut = this.physics.add.sprite(
         Phaser.Math.Between(0, 1400),
         Phaser.Math.Between(0, 900),
@@ -95,7 +96,9 @@ export default class HelloWorldScene extends Phaser.Scene {
           goodDonut.destroy();
           this.donutCounter += 1;
           this.text2?.setText(this.donutCounter.toString());
-          if (this.donutCounter === 5) {
+          if (this.donutCounter > 1) {
+            clearInterval(this.intervalHandler);
+            clearInterval(this.intervalHandlerBadDonuts);
             this.scene.start('platformer');
           }
         }
@@ -116,7 +119,7 @@ export default class HelloWorldScene extends Phaser.Scene {
       );
     }, 2000);
 
-    setInterval(() => {
+    this.intervalHandlerBadDonuts = setInterval(() => {
       const badDonut = this.physics.add.sprite(
         Phaser.Math.Between(0, 1400),
         Phaser.Math.Between(0, 900),

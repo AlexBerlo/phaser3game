@@ -15,6 +15,12 @@ const config: Phaser.Types.Core.GameConfig = {
       gravity: { y: 0 },
     },
   },
+  scale: {
+    parent: 'app',
+    mode: Phaser.Scale.FIT,
+    width: 900,
+    height: 600,
+  },
   scene: [MainMenuScene, HelloWorldScene, PlatformerScene],
   // scene: [PlatformerScene],
 };
