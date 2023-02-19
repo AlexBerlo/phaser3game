@@ -61,7 +61,7 @@ export default class HelloWorldScene extends Phaser.Scene {
     this.player?.setCollideWorldBounds(true);
 
     // this.physics.add.overlap(cody, donut);
-    this.physics.add.collider(this.player, this.donut, (player, donut) => {
+    this.physics.add.collider(this.player, this.donut, ({}, donut) => {
       (donut as Phaser.Types.Physics.Arcade.ImageWithDynamicBody).setVelocityX(500);
       (donut as Phaser.Types.Physics.Arcade.ImageWithDynamicBody).setVelocityY(500);
     });
