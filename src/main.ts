@@ -18,6 +18,7 @@ const config: Phaser.Types.Core.GameConfig = {
   scale: {
     parent: 'app',
     mode: Phaser.Scale.FIT,
+    autoCenter: Phaser.Scale.CENTER_BOTH,
     width: 900,
     height: 600,
   },
