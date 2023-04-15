@@ -45,12 +45,12 @@ export default class HelloWorldScene extends Phaser.Scene {
     this.donut = this.physics.add.sprite(300, 200, 'donuts', 'donut_1.png');
     this.donut.scale = 0.1;
 
-    const particles = this.add.particles('donuts', 'glazing_1.png');
-    const emitter = particles.createEmitter({
-      speed: 200,
-      scale: { start: 0.05, end: 0 },
-      blendMode: Phaser.BlendModes.NORMAL,
-    });
+    // const particles = this.add.particles('donuts', 'glazing_1.png');
+    // const emitter = particles.createEmitter({
+    //   speed: 200,
+    //   scale: { start: 0.05, end: 0 },
+    //   blendMode: Phaser.BlendModes.NORMAL,
+    // });
 
     this.donut?.setVelocity(100, 200);
     this.donut?.setBounce(1, 1);
@@ -66,7 +66,7 @@ export default class HelloWorldScene extends Phaser.Scene {
       (donut as Phaser.Types.Physics.Arcade.ImageWithDynamicBody).setVelocityY(500);
     });
 
-    emitter.startFollow(this.donut);
+    // emitter.startFollow(this.donut);
 
     this.input.keyboard?.on('keydown', () => {
       this.player?.play('walk');
@@ -150,6 +150,8 @@ export default class HelloWorldScene extends Phaser.Scene {
   }
 
   update() {
+    // const pointer = this.input.activePointer;
+    // console.log(pointer);
     this.player?.setVelocity(0);
 
     if (this.cursors?.left.isDown) {
