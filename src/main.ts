@@ -7,8 +7,8 @@ import PlatformerScene from './PlatformerScene';
 const config: Phaser.Types.Core.GameConfig = {
   type: Phaser.AUTO,
   parent: 'app',
-  width: 900,
-  height: 600,
+  width: '100%',
+  height: '100%',
   physics: {
     default: 'arcade',
     arcade: {
@@ -17,9 +17,9 @@ const config: Phaser.Types.Core.GameConfig = {
   },
   scale: {
     parent: 'app',
-    mode: Phaser.Scale.FIT,
+    mode: Phaser.Scale.RESIZE,
     autoCenter: Phaser.Scale.CENTER_BOTH,
-    width: 900,
+    width: 800,
     height: 600,
   },
   scene: [MainMenuScene, HelloWorldScene, PlatformerScene],
