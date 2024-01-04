@@ -17,7 +17,7 @@ export default class MainMenuScene extends Phaser.Scene {
     );
 
     this.add.text(380, 250, 'Click to', { fontSize: '20px' });
-    const startText = this.add.text(380, 270, 'START, poeziile tale sunt misto !', {
+    const startText = this.add.text(380, 270, 'START', {
       fontFamily: 'Arial',
       fontSize: '48px',
     });
